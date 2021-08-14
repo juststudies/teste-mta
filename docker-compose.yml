@@ -1,0 +1,18 @@
+version: '3'
+services: 
+  mysql:
+    image: mysql
+    restart: always
+    environment: 
+      MYSQL_DATABASE: "meeta"
+      MYSQL_USER: "teste"
+      MYSQL_PASSWORD: "senhateste"
+      MYSQL_ROOT_PASSWORD: "root"
+    ports:
+      - "3306:3306"
+    expose: 
+      - "3306"
+    volumes:
+      - mysqldata:/var/lib/mysql
+volumes: 
+  mysqldata:
