@@ -10,4 +10,5 @@ class User extends Model
     use SoftDeletes;    
     public $timestamps = false;
     protected $fillable = ['name', 'username', 'password'];
+    protected $dates = ['deleted_at'];
 }

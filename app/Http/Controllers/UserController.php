@@ -18,7 +18,7 @@ class UserController extends Controller
         $users = User::all();
         $message = $request->session()->get('message');
 
-        return view('users.index', compact('users', 'messages'));
+        return view('users.index', compact('users', 'message'));
     }
 
     /**
@@ -39,10 +39,23 @@ class UserController extends Controller
      */
     public function store(CreateUserFormRequest $request)
     {
-        User::create($request->all());
-        return redirect(
-                route('users.index'))
-                ->with(['message' => 'Usuário criado com sucesso!']);
+        $user = new User;
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->password = $request->password;
+        $user->save();
+        try{
+            $request->session()
+                ->flash('message', "Usuário {$user->name} criado com sucesso");
+    
+            return redirect(route('index'))
+                    ->with(['message' => 'Usuário criado com sucesso']);
+        }catch(\Exception $e){
+            return response()->json([
+                "error"=>true,
+                "message"=> $e->getMessage()
+            ]);
+        }
     }
 
     /**
@@ -53,7 +66,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-    
+        // $user = User::findOrFail($id);
+        // return view('users.show', compact('user'));
     }
 
     /**
@@ -65,7 +79,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('users.edit', compact('users'));
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -85,7 +99,7 @@ class UserController extends Controller
 
         User::whereId($id)->update($newUser);
         
-        return redirect(route('users.index'))
+        return redirect(route('index'))
                 ->with(['message'=>'Usuário atualizado com sucesso!']);
     }
 
@@ -98,7 +112,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::findOrFail($id)->delete();
-        return redirect(route('users.index'))
+        return redirect(route('index'))
                 ->with(['message'=>'Usuário deletado com êxito']);
     }
 }
