@@ -1,10 +1,10 @@
 <section class="d-flex ">
-    <form action="usuarios/delete/{{$row->id}}" method="post">
+    <form action="users/delete/{{$row->id}}" method="post">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-danger">Delete</button>
     </form>
-    <a href="/usuarios/edit{{$row->id}}">
+    <a href="/users/edit/{{$row->id}}">
         <button class="btn btn-primary ml-1">Edit</button>
     </a>
 </section>

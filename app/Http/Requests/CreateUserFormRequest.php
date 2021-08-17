@@ -32,13 +32,13 @@ class CreateUserFormRequest extends FormRequest
 
     public function messages(){
         return [
-            'name.required' => ':attribute é requerido',
-            'name.max' => ':attribute tem valor máximo de 255 caracteres',
-            'name.min' => ':attribute tem valor mínimo de 3',
-            'username.required' => ':attribute é requerido',
-            'username.max' => ':attribute tem valor máximo de 32 caracteres',
-            'password.required' => ':attribute é requerido',
-            'password.min' => ':attribute tem valor mínimo de 6 caracteres'
+            'name.required' => 'O campo :attribute é requerido',
+            'name.max' => 'O campo :attribute tem valor máximo de 255 caracteres',
+            'name.min' => 'O campo :attribute tem valor mínimo de 3',
+            'username.required' => 'O campo :attribute é requerido',
+            'username.max' => 'O campo :attribute tem valor máximo de 32 caracteres',
+            'password.required' => 'O campo :attribute é requerido',
+            'password.min' => 'O campo :attribute tem valor mínimo de 6 caracteres'
         ];
     }
 }

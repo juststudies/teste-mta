@@ -10,9 +10,17 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
     <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+    </style>
 </head>
 <body>
-    <main class="container mt-3">
+    <main class="container">
         @yield('content')
     </main>
 
@@ -25,7 +33,7 @@
             $('.yajra-dt').DataTable({
                 serverside: true,
                 processing: true,
-                ajax: "usuarios",
+                ajax: "users",
                 columns: [
                     {data: 'name', name: 'name'},
                     {data: 'username', name: 'username'},
@@ -33,7 +41,9 @@
                     {data: 'action',name: 'action'}
                 ]
             });
+            $(".alert").slideDown(300).delay(3500).slideUp(300);   
         });
+        
     </script>
 </body>
 </html>

@@ -24,7 +24,10 @@ class UserController extends Controller
                     })
                     ->make(true);
         }
-        return view('users.index');
+
+        $message = $request->session()->get('message');
+
+        return view('users.index', compact('message'));
     }
 
     /**
@@ -50,18 +53,10 @@ class UserController extends Controller
         $user->username = $request->username;
         $user->password = $request->password;
         $user->save();
-        try{
-            $request->session()
-                ->flash('message', "Usuário {$user->name} criado com sucesso");
     
-            return redirect(route('index'))
-                    ->with(['message' => 'Usuário criado com sucesso']);
-        }catch(\Exception $e){
-            return response()->json([
-                "error"=>true,
-                "message"=> $e->getMessage()
-            ]);
-        }
+        $request->session()
+            ->flash('message', "Usuário {$user->username} criado com sucesso");
+            return redirect()->route('index');
     }
 
     /**
@@ -84,7 +79,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::find($id);
         return view('users.edit', compact('user'));
     }
 
@@ -105,7 +100,7 @@ class UserController extends Controller
 
         User::whereId($id)->update($newUser);
         
-        return redirect(route('index'))
+        return redirect()->route('index')
                 ->with(['message'=>'Usuário atualizado com sucesso!']);
     }
 
