@@ -58,19 +58,7 @@ class UserController extends Controller
             ->flash('message', "Usuário {$user->username} criado com sucesso");
             return redirect()->route('index');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        // $user = User::findOrFail($id);
-        // return view('users.show', compact('user'));
-    }
-
+    
     /**
      * Show the form for editing the specified resource.
      *

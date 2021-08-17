@@ -1,78 +1,61 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# Meta
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Como utilizar esse projeto:
 
-## About Laravel
+Basta utilizar o comando: 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+ ```
+ git clone https://github.com/juststudies/teste-mta
+ ```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+ E então instalar o composer.json com o comando:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+ ```
+ composer install
+ ```
 
-## Learning Laravel
+Adicionar e configurar o arquivo `.env` e adicionar as suas configurações de banco de dados, como especificado no arquivo `.env.example`
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```
+DB_CONNECTION=mysql
+DB_HOST=seuhostaqui
+DB_PORT=portadoseuhostaqui
+DB_DATABASE=nomedobanco
+DB_USERNAME=usuariodobanco
+DB_PASSWORD=senhadobanco
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Caso deseje, há um arquivo `docker-compose.yml` possuindo as principais configurações do banco MySQL, bastando apenas alterar a configurações do `.env` para as configurações que estão no `docker-compose.yml`
 
-## Laravel Sponsors
+Se optou por utilizar o [docker-compose.yml](https://docs.docker.com/compose/install/), precisará rodar o seguinte comando:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```
+docker-compose up
+```
+E por ultimo, rode as Migrations:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+```
+php artisan migrate
+```
+## Rotas:
+___
 
-## Contributing
+A aplicação possui as seguintes rotas:
+- users: Rota principal, é aqui que o `DataTables` faz sua mágica.[GET]
+- users/create: Formulário para criar um novo usuário.[GET]
+- users/edit/{id}: Formulário com os dados que se deseja atualizar.[GET]
+- users/store: Ação para guardar o novo dado, digitado, da rota users/create.[POST]
+- users/edit/{id}: Ação para atualizar dados, digitados, da rota users/edit/{id}.[PUT]
+- users/delete/{id}: Ação para deletar um determinado arquivo.[DELETE]
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Para saber mais: 
+___
 
-## Code of Conduct
+O presente projeto possui seeders, caso queira populá-los (configurado para gerar 100 registros), basta utilizar o comando:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+php artisan db:seed
+```
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+O presente projeto possui a biblioteca 
+[yajra/laravel-datatables-oracle](https://github.com/yajra/laravel-datatables).
