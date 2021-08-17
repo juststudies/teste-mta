@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateUserFormRequest;
 use App\User;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
@@ -15,10 +16,15 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::all();
-        $message = $request->session()->get('message');
-
-        return view('users.index', compact('users', 'message'));
+        $data = User::all();
+        if ($request->ajax()) {
+            return DataTables::of($data)
+                    ->addColumn('action', function($row){
+                        return view('users.actions', compact('row'));
+                    })
+                    ->make(true);
+        }
+        return view('users.index');
     }
 
     /**
@@ -111,8 +117,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::findOrFail($id)->delete();
-        return redirect(route('index'))
-                ->with(['message'=>'Usuário deletado com êxito']);
+        $user = User::find($id);
+        if($user){
+            $user->delete();
+        }
+        return redirect()->route('index');
     }
 }

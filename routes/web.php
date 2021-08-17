@@ -13,13 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+    
 
 Route::group(['prefix' => 'usuarios'], function () {
     Route::get('/', 'UserController@index')->name('index');
-    Route::get('/create', 'UserController@create')->name('create');
-    Route::get('/edit/{id}', 'UserController@edit')->name('edit');
-    Route::post('/store', 'UserController@store')->name('store');
-    Route::get('/show/{id}', 'UserController@show')->name('show');
-    Route::put('/update/{id}', 'UserController@update')->name('update');
-    Route::delete('/delete/{id}', 'UserController@destroy')->name('destroy');
+    Route::get('create', 'UserController@create')->name('create');
+    Route::get('edit/{id}', 'UserController@edit')->name('edit');
+    Route::post('store', 'UserController@store')->name('store');
+    Route::get('show/{id}', 'UserController@show')->name('show');
+    Route::put('update/{id}', 'UserController@update')->name('update');
+    Route::delete('delete/{id}', 'UserController@destroy')->name('destroy');
 });

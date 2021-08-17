@@ -1,12 +1,13 @@
 @extends('layout')
 
 @section('content')
-<table class="display" style="width:100%">
+<table class="table yajra-dt">
     <thead>
         <tr>
-            <th>Nome</th>
+            <th>Name</th>
             <th>Username</th>
             <th>Password</th>
+            <th>Action</th>
         </tr>
     </thead>
 </table>
